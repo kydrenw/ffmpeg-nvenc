@@ -85,9 +85,10 @@ InstallNvidiaSDK() {
 InstallNvCodecIncludes() {
     echo "Installing Nv codec headers from https://github.com/FFmpeg/nv-codec-headers"
     cd "$source_dir"
-    git clone https://github.com/FFmpeg/nv-codec-headers
+    git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
     cd nv-codec-headers
-    cp -a include/ffnvcodec "$inc_dir"
+    make
+    sudo make install
 }
 
 BuildNasm() {
@@ -230,7 +231,6 @@ BuildFFmpeg() {
     #                  --enable-avisynth 
     #                  --enable-gnutls 
     #                  --enable-ladspa 
-    #                  --enable-libaom 
     #                  --enable-libass 
     #                  --enable-libbluray 
     #                  --enable-libbs2b 
