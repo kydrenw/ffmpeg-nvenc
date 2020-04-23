@@ -85,8 +85,14 @@ InstallNvidiaSDK() {
 InstallNvCodecIncludes() {
     echo "Installing Nv codec headers from https://github.com/FFmpeg/nv-codec-headers"
     cd "$source_dir"
-    git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
-    cd nv-codec-headers
+    if [ -d nv-codec-headers ]; then
+        cd nv-codec-headers
+        git pull
+    else
+        git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
+        cd nv-codec-headers
+    fi
+    git checkout sdk/9.0
     make
     sudo make install
 }
@@ -120,8 +126,13 @@ BuildYasm() {
 BuildX264() {
     echo "Compiling libx264"
     cd $source_dir
-    git clone https://code.videolan.org/videolan/x264.git
-    cd x264
+    if [ -d x264 ]; then
+        cd x264
+        git pull
+    else
+        git clone https://code.videolan.org/videolan/x264.git
+        cd x264
+    fi
     ./configure --prefix="$build_dir" --bindir="$bin_dir" --enable-pic --enable-shared
     make -j${cpus}
     make install
@@ -217,58 +228,58 @@ BuildFFmpeg() {
 
     # ffmpeg version 4.0.2-2 Copyright (c) 2000-2018 the FFmpeg developers
     #   built with gcc 8 (Ubuntu 8.2.0-7ubuntu1)
-    #   configuration: --prefix=/usr 
-    #                  --extra-version=2 
-    #                  --toolchain=hardened 
-    #                  --libdir=/usr/lib/x86_64-linux-gnu 
-    #                  --incdir=/usr/include/x86_64-linux-gnu 
-    #                  --arch=amd64 
-    #                  --enable-gpl 
-    #                  --disable-stripping 
-    #                  --enable-avresample 
-    #                  --disable-filter=resample 
-    #                  --enable-avisynth 
-    #                  --enable-gnutls 
-    #                  --enable-ladspa 
-    #                  --enable-libass 
-    #                  --enable-libbluray 
-    #                  --enable-libbs2b 
-    #                  --enable-libcaca 
-    #                  --enable-libcdio 
-    #                  --enable-libcodec2 
-    #                  --enable-libflite 
-    #                  --enable-libfontconfig 
+    #   configuration: --prefix=/usr
+    #                  --extra-version=2
+    #                  --toolchain=hardened
+    #                  --libdir=/usr/lib/x86_64-linux-gnu
+    #                  --incdir=/usr/include/x86_64-linux-gnu
+    #                  --arch=amd64
+    #                  --enable-gpl
+    #                  --disable-stripping
+    #                  --enable-avresample
+    #                  --disable-filter=resample
+    #                  --enable-avisynth
+    #                  --enable-gnutls
+    #                  --enable-ladspa
+    #                  --enable-libass
+    #                  --enable-libbluray
+    #                  --enable-libbs2b
+    #                  --enable-libcaca
+    #                  --enable-libcdio
+    #                  --enable-libcodec2
+    #                  --enable-libflite
+    #                  --enable-libfontconfig
     #                  --enable-libfreetype
     #                  --enable-libfribidi
-    #                  --enable-libgme 
-    #                  --enable-libgsm 
-    #                  --enable-libjack 
-    #                  --enable-libmp3lame 
-    #                  --enable-libmysofa 
-    #                  --enable-libopenjpeg 
-    #                  --enable-libopenmpt 
-    #                  --enable-libopus 
-    #                  --enable-libpulse 
-    #                  --enable-librsvg 
-    #                  --enable-librubberband 
-    #                  --enable-libshine 
-    #                  --enable-libsnappy 
-    #                  --enable-libsoxr 
-    #                  --enable-libspeex 
-    #                  --enable-libssh 
-    #                  --enable-libtheora 
-    #                  --enable-libtwolame 
-    #                  --enable-libvorbis 
-    #                  --enable-libvpx 
-    #                  --enable-libwavpack 
-    #                  --enable-libwebp 
-    #                  --enable-libx265 
-    #                  --enable-libxml2 
-    #                  --enable-libxvid 
-    #                  --enable-libzmq 
-    #                  --enable-libzvbi 
-    #                  --enable-lv2 
-    #                  --enable-omx 
+    #                  --enable-libgme
+    #                  --enable-libgsm
+    #                  --enable-libjack
+    #                  --enable-libmp3lame
+    #                  --enable-libmysofa
+    #                  --enable-libopenjpeg
+    #                  --enable-libopenmpt
+    #                  --enable-libopus
+    #                  --enable-libpulse
+    #                  --enable-librsvg
+    #                  --enable-librubberband
+    #                  --enable-libshine
+    #                  --enable-libsnappy
+    #                  --enable-libsoxr
+    #                  --enable-libspeex
+    #                  --enable-libssh
+    #                  --enable-libtheora
+    #                  --enable-libtwolame
+    #                  --enable-libvorbis
+    #                  --enable-libvpx
+    #                  --enable-libwavpack
+    #                  --enable-libwebp
+    #                  --enable-libx265
+    #                  --enable-libxml2
+    #                  --enable-libxvid
+    #                  --enable-libzmq
+    #                  --enable-libzvbi
+    #                  --enable-lv2
+    #                  --enable-omx
     #                  --enable-openal
     #                  --enable-opengl
     #                  --enable-sdl2
