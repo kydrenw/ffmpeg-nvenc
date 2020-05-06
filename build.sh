@@ -201,8 +201,8 @@ BuildFFmpeg() {
     cd ffmpeg-${ffmpeg_version}
     PKG_CONFIG_PATH="${build_dir}/lib/pkgconfig" ./configure \
         --prefix="$build_dir" \
-        --extra-cflags="-fPIC -m64 -I${inc_dir}" \
-        --extra-ldflags="-L${build_dir}/lib" \
+        --extra-cflags="-fPIC -m64 -I${inc_dir} -I/usr/local/cuda/include" \
+        --extra-ldflags="-L${build_dir}/lib -L/usr/local/cuda/lib64" \
         --bindir="$bin_dir" \
         --incdir="$inc_dir" \
         --enable-gpl \
@@ -219,6 +219,7 @@ BuildFFmpeg() {
         --enable-nvenc \
         --enable-pic \
         --enable-libxcb \
+        --enable-libnpp \
         --extra-ldexeflags=-pie \
         --enable-shared
     make -j${cpus}
