@@ -7,6 +7,14 @@ thus providing NVENC for OBS.
 It is brought to you by [Linux GameCast](http://linuxgamecast.com/) and
 [Lutris](https://lutris.net) #lgccares
 
+## Requirements
+
+```
+- CUDA driver
+- unzip
+- git
+```
+
 ## Usage
 
 Clone the repo then use the `build.sh` script to compile the binaries
