@@ -9,13 +9,14 @@ It is brought to you by [Linux GameCast](http://linuxgamecast.com/) and
 
 ## Requirements
 
+* CUDA driver and toolkit
 ```
-- CUDA driver
 wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run
 sudo sh cuda_10.2.89_440.33.01_linux.run
-- unzip
-- git
 ```
+* unzip
+* git
+
 
 ## Usage
 
