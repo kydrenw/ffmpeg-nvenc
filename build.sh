@@ -168,7 +168,7 @@ BuildOpus() {
     cd $source_dir
     opus_version="1.1"
     opus_basename="opus-${opus_version}"
-    wget -4 "http://downloads.xiph.org/releases/opus/${opus_basename}.tar.gz"
+    wget -4 "https://ftp.osuosl.org/pub/xiph/releases/opus/${opus_basename}.tar.gz"
     tar xzf "${opus_basename}.tar.gz"
     cd $opus_basename
     ./configure --prefix="$build_dir" # --disable-shared
